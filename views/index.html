@@ -199,8 +199,9 @@
     try {
       const { data } = await axios.put(
         `http://localhost:3000/usuario?id=${id}`,
+        
         {
-          name,
+          nombre: name,
           balance,
         }
       );
@@ -218,6 +219,7 @@
     try {
       const response = await fetch("http://localhost:3000/usuario", {
         method: "post",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           nombre,
           balance,
@@ -243,7 +245,9 @@
     try {
       const response = await fetch("http://localhost:3000/transferencia", {
         method: "post",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          
           emisor,
           receptor,
           monto,
@@ -289,6 +293,7 @@
     const response = await fetch(`http://localhost:3000/usuario?id=${id}`, {
       method: "DELETE",
     });
+    alert("Usuario eliminado");
     getUsuarios();
   };
 
@@ -299,10 +304,10 @@
     data.forEach((t) => {
       $(".transferencias").append(`
        <tr>
-         <td> ${formatDate(t[4])} </td>
+         <td> ${formatDate(t[3])} </td>
+         <td> ${t[0]} </td>
          <td> ${t[1]} </td>
          <td> ${t[2]} </td>
-         <td> ${t[3]} </td>
        </tr>
      `);
     });
